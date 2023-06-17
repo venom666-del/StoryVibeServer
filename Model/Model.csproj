@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F2FC1D68-1019-4415-9A4E-A01EDA6899E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModelLists\AgeBarriersList.cs" />
+    <Compile Include="ModelLists\AuthsList.cs" />
+    <Compile Include="ModelLists\CategoriesList.cs" />
+    <Compile Include="ModelLists\ChaptersList.cs" />
+    <Compile Include="ModelLists\CommentsList.cs" />
+    <Compile Include="ModelLists\FavoritesList.cs" />
+    <Compile Include="ModelLists\FollowsList.cs" />
+    <Compile Include="ModelLists\LeavesList.cs" />
+    <Compile Include="ModelLists\ShopsList.cs" />
+    <Compile Include="ModelLists\StoriesList.cs" />
+    <Compile Include="ModelLists\UserOpinionsList.cs" />
+    <Compile Include="ModelLists\UsersList.cs" />
+    <Compile Include="ModelObjects\AgeBarrier.cs" />
+    <Compile Include="ModelObjects\Auth.cs" />
+    <Compile Include="ModelObjects\BaseEntity.cs" />
+    <Compile Include="ModelObjects\Category.cs" />
+    <Compile Include="ModelObjects\Chapter.cs" />
+    <Compile Include="ModelObjects\Comment.cs" />
+    <Compile Include="ModelObjects\Enums.cs" />
+    <Compile Include="ModelObjects\Favorite.cs" />
+    <Compile Include="ModelObjects\Follow.cs" />
+    <Compile Include="ModelObjects\Leaf.cs" />
+    <Compile Include="ModelObjects\LeafType.cs" />
+    <Compile Include="ModelObjects\Shop.cs" />
+    <Compile Include="ModelObjects\Story.cs" />
+    <Compile Include="ModelObjects\User.cs" />
+    <Compile Include="ModelObjects\UserOpinion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
