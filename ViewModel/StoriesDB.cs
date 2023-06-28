@@ -23,26 +23,31 @@ namespace ViewModel
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
             Story story = new Story();
-            return $"DELETE from storiesTbl where storyID={story.ID}";
+            return $"DELETE from chaptersTbl where storyID={story.ID}; DELETE from storiesTbl where storyID={story.ID}";
         }
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
             Story story = new Story();
-            return $"INSERT INTO storiesTbl(name, description, userID, ageBarrierID, categoryID, datePublished) VALUES(N'{story.name}', N'{story.description}', {story.user.ID}, {story.ageBarrier.ID}, {story.category.ID}, '{story.datePublished}')";
+            return $"INSERT INTO storiesTbl(header, description, userID, ageBarrierID, datePublished, languageID, statusID, imageLink, price) VALUES(N'{story.header}', N'{story.description}', {story.user.ID}, {story.ageBarrier.ID}, '{story.datePublished}', '{story.language.ID}', '{story.status.ID}', '{story.imageLink}', '{story.price}')";
         }
 
-        public StoriesList SelectStories()
+        public ServedFullStory SelectStories()
         {
-            command.CommandText = "SELECT storiesTbl.imageLink, storiesTbl.userID, storiesTbl.ageBarrierID, storiesTbl.categoryID, storiesTbl.storyID, storiesTbl.name, storiesTbl.description, UsersTbl.name as userName, ageBarriers.name as ageBarrierName, categories.name as categoryName, storiesTbl.datePublished From storiesTbl join UsersTbl on storiesTbl.userID = UsersTbl.userID join leavesTbl as ageBarriers on ageBarriers.leafID = ageBarrierID join leavesTbl as categories on categories.leafID = categoryID";
+            command.CommandText = "SELECT storiesTbl.storyID, storiesTbl.header, storiesTbl.description, storiesTbl.userID, UsersTbl.name as userName, storiesTbl.ageBarrierID, ageBarriers.name as ageBarrierName, storiesTbl.datePublished, storiesTbl.languageID, languages.name as languageName, storiesTbl.statusID, statuses.name as statusName, storiesTbl.imageLink, storiesTbl.price From storiesTbl join UsersTbl on storiesTbl.userID = UsersTbl.userID join leavesTbl as ageBarriers on ageBarriers.leafID = ageBarrierID join leavesTbl as languages on languages.leafID = languageID join leavesTbl as statuses on statuses.leafID = storiesTbl.statusID";
             StoriesList stories = new StoriesList(Select());
-            return stories;
+            CategoriesDB categoriesDB = new CategoriesDB();
+            CategoryGroupList categoryGroupList = categoriesDB.SelectCategories();
+            ServedFullStory fullStory = new ServedFullStory();
+            fullStory.stories = stories;
+            fullStory.categoryGroup = categoryGroupList;
+            return fullStory;
         }
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Story story = entity as Story;
             story.ID = (int)reader["storyID"];
-            story.name = (string)reader["name"];
+            story.header = (string)reader["header"];
             story.description = (string)reader["description"];
 
             User user = new User();
@@ -55,13 +60,19 @@ namespace ViewModel
             ageBarrier.name = (string)reader["ageBarrierName"];
             story.ageBarrier = ageBarrier;
 
-            Category category = new Category();
-            category.ID = (int)reader["categoryID"];
-            category.name = (string)reader["categoryName"];
-            story.category = category;
+            Language language = new Language();
+            language.ID = (int)reader["languageID"];
+            language.name = (string)reader["languageName"];
+            story.language = language;
+
+            Status status = new Status();
+            status.ID = (int)reader["statusID"];
+            status.name = (string)reader["statusName"];
+            story.status = status;
 
             story.datePublished = (string)reader["datePublished"];
             story.imageLink = (string)reader["imageLink"];
+            story.price = (double)reader["price"];
 
             return story;
         }
@@ -69,7 +80,7 @@ namespace ViewModel
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
             Story story = new Story();
-            return $"Update storiesTbl set name=N'{story.name}', description=N'{story.description}', userID={story.user.ID}, ageBarrier={story.ageBarrier.ID}, categoryID={story.category.ID}, datePublished={story.datePublished} where storyID={story.ID}";
+            return $"Update storiesTbl set header=N'{story.header}', description=N'{story.description}', userID={story.user.ID}, ageBarrier={story.ageBarrier.ID}, datePublished={story.datePublished}, languageID={story.language.ID}, statusID={story.status.ID}, imageLink='{story.imageLink}', price={story.price} where storyID={story.ID}";
         }
 
         protected override BaseEntity newEntity()

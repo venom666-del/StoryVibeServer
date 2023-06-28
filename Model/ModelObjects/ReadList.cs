@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.ModelObjects
 {
-    public class Favorite : UserOpinion
+    public class ReadList : UserOpinion
     {
     }
 }

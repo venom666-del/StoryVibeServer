@@ -59,7 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDB.cs" />
+    <Compile Include="CategoriesDB.cs" />
     <Compile Include="ChangeEntity.cs" />
+    <Compile Include="ChapterDB.cs" />
     <Compile Include="LeafDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoriesDB.cs" />

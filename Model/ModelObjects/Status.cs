@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.ModelObjects
 {
-    public class Comment : UserOpinion
+    public class Status : Leaf
     {
-        public string content { get; set; }
-        public Chapter chapter { get; set; }
     }
 }

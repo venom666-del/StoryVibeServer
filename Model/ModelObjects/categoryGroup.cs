@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model.ModelObjects
 {
-    public class UserOpinion : BaseEntity
+    public class categoryGroup : BaseEntity
     {
-        public User user { get; set; }
         public Story story { get; set; }
-        public int type { get; set; }
-        public string addedDate { get; set; }
+        public Category category { get; set; }
     }
 }

@@ -25,11 +25,11 @@ namespace ViewModel
             switch (leaf)
             {
                 case Enums.leaves.all:
-                    command.CommandText = "SELECT leavesTbl.name as leafName, leavesTbl.leafID, leafTypeTbl.name as leafTypeName From leavesTbl join leafTypeTbl on leavesTbl.typeID = leafTypeTbl.typeID";
+                    command.CommandText = "SELECT leavesTbl.name as leafName, leavesTbl.leafID, leafTypeTbl.name as leafTypeName, leafTypeTbl.typeID as leafTypeID From leavesTbl join leafTypeTbl on leavesTbl.typeID = leafTypeTbl.typeID";
                     leaves = new LeavesList(base.Select());
                     break;
                 default:
-                    command.CommandText = $"SELECT leavesTbl.name as leafName, leavesTbl.leafID, leafTypeTbl.name as leafTypeName From leavesTbl join leafTypeTbl on leavesTbl.typeID = leafTypeTbl.typeID where leavesTbl.typeID={(int)leaf}";
+                    command.CommandText = $"SELECT leavesTbl.name as leafName, leavesTbl.leafID, leafTypeTbl.name as leafTypeName, leafTypeTbl.typeID as leafTypeID From leavesTbl join leafTypeTbl on leavesTbl.typeID = leafTypeTbl.typeID where leavesTbl.typeID={(int)leaf}";
                     leaves = new LeavesList(base.Select());
                     break;
             }
@@ -53,10 +53,12 @@ namespace ViewModel
             Leaf leaf = entity as Leaf;
             leaf.ID = (int)reader["leafID"];
             leaf.name = (string)reader["leafName"];
+
             LeafType type = new LeafType();
-            type.ID = (int)reader["typeID"];
+            type.ID = (int)reader["leafTypeID"];
             type.name = (string)reader["leafTypeName"];
             leaf.Type = type;
+
             return leaf;
         }
 

@@ -24,11 +24,15 @@ namespace Host
         public MainWindow()
         {
             InitializeComponent();
+
             ServiceHost UserService = new ServiceHost(typeof(WCF.UserService));
             UserService.Open();
 
             ServiceHost StoryService = new ServiceHost(typeof(WCF.StoryService));
             StoryService.Open();
+
+            ServiceHost LeafService = new ServiceHost(typeof(WCF.LeafService));
+            LeafService.Open();
         }
     }
 }

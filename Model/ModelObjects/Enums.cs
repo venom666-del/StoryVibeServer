@@ -17,10 +17,12 @@ namespace Model.ModelObjects
 
         public enum leaves
         {
-            language = 1,
-            category = 2,
-            ageBarrier = 3,
-            all = 4
+            category = 3,
+            Auth = 4,
+            ageBarrier = 5,
+            language = 7,
+            status = 8,
+            all = 10
         }
     }
 }

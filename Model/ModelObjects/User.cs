@@ -13,5 +13,6 @@ namespace Model.ModelObjects
         public string password { get; set; }
         public Auth auth { get; set; }
         public string birthDate { get; set; }
+        public string creationDate { get; set; }
     }
 }

@@ -11,32 +11,56 @@ namespace WCF
 {
     public class StoryService : IStoryService
     {
-        public int Delete(Story story)
+        //stories
+        public ServedFullStory SelectStories()
+        {
+            StoriesDB storiesDB = new StoriesDB();
+            ServedFullStory stories = storiesDB.SelectStories();
+            return stories;
+        }
+        public int AddNewStory(Story story)
+        {
+            StoriesDB storiesDB = new StoriesDB();
+            storiesDB.Insert(story);
+            return storiesDB.SaveChanges();
+        }
+        public int UpdateStory(Story story)
+        {
+            StoriesDB storiesDB = new StoriesDB();
+            storiesDB.Update(story);
+            return storiesDB.SaveChanges();
+        }
+        public int DeleteStory(Story story)
         {
             StoriesDB storiesDB = new StoriesDB();
             storiesDB.Delete(story);
             return storiesDB.SaveChanges();
         }
 
-        public int Insert(Story story)
+        //chapters
+        public ChaptersList SelectChapters()
         {
-            StoriesDB storiesDB = new StoriesDB();
-            storiesDB.Insert(story);
-            return storiesDB.SaveChanges();
+            ChapterDB chapterDB = new ChapterDB();
+            ChaptersList chapters = chapterDB.SelectAll();
+            return chapters;
         }
-
-        public StoriesList Select()
+        public int AddNewChapter(Chapter chapter)
         {
-            StoriesDB storiesDB = new StoriesDB();
-            StoriesList stories = storiesDB.SelectStories();
-            return stories;
+            ChapterDB chapterDB = new ChapterDB();
+            chapterDB.Insert(chapter);
+            return chapterDB.SaveChanges();
         }
-
-        public int Update(Story story)
+        public int UpdateChapter(Chapter chapter)
         {
-            StoriesDB storiesDB = new StoriesDB();
-            storiesDB.Update(story);
-            return storiesDB.SaveChanges();
+            ChapterDB chapterDB = new ChapterDB();
+            chapterDB.Update(chapter);
+            return chapterDB.SaveChanges();
+        }
+        public int DeleteChapter(Chapter chapter)
+        {
+            ChapterDB chapterDB = new ChapterDB();
+            chapterDB.Delete(chapter);
+            return chapterDB.SaveChanges();
         }
     }
 }

@@ -12,16 +12,30 @@ namespace WCF
     [ServiceContract]
     public interface IStoryService
     {
+        //stories
         [OperationContract]
-        StoriesList Select();
+        ServedFullStory SelectStories();
 
         [OperationContract]
-        int Insert(Story story);
+        int AddNewStory(Story story);
 
         [OperationContract]
-        int Update(Story story);
+        int UpdateStory(Story story);
 
         [OperationContract]
-        int Delete(Story story);
+        int DeleteStory(Story story);
+
+        //chapters
+        [OperationContract]
+        ChaptersList SelectChapters();
+
+        [OperationContract]
+        int AddNewChapter(Chapter chapter);
+
+        [OperationContract]
+        int UpdateChapter(Chapter chapter);
+
+        [OperationContract]
+        int DeleteChapter(Chapter chapter);
     }
 }

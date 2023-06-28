@@ -10,5 +10,6 @@ namespace Model.ModelObjects
     {
         public User follower { get; set; }
         public User target { get; set; }
+        public string followedDate { get; set; }
     }
 }
