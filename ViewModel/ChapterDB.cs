@@ -21,7 +21,7 @@ namespace ViewModel
 
         public ChaptersList SelectAll()
         {
-            command.CommandText = "Select chaptersTbl.chapterID, chaptersTbl.storyID, storiesTbl.header, chaptersTbl.topic, chaptersTbl.content, chaptersTbl.chapterNumber from chaptersTbl join storiesTbl on chaptersTbl.storyID = storiesTbl.storyID";
+            command.CommandText = "Select chaptersTbl.chapterID, chaptersTbl.datePublished, chaptersTbl.storyID, storiesTbl.header, chaptersTbl.topic, chaptersTbl.content, chaptersTbl.chapterNumber from chaptersTbl join storiesTbl on chaptersTbl.storyID = storiesTbl.storyID";
             ChaptersList chapters = new ChaptersList(base.Select());
             return chapters;
         }
@@ -35,12 +35,12 @@ namespace ViewModel
         protected override string CreateInsertSQL(BaseEntity entity)
         {
             Chapter chapter = entity as Chapter;
-            return $"insert into chaptersTbl (storyID, topic, content, chapterNumber) Values ({chapter.story.ID}, N'{chapter.topic}', N'{chapter.content}', '{chapter.chapterNumber}')";
+            return $"insert into chaptersTbl (storyID, topic, content, chapterNumber, datePublished) Values ({chapter.story.ID}, N'{chapter.topic}', N'{chapter.content}', '{chapter.chapterNumber}', '{chapter.datePublished}')";
         }
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            User user = entity as User;
-            return $"update UsersTbl set name=N'{user.name}', email=N'{user.email}', password=N'{user.password}', authID='{user.auth.ID}', birthDate='{user.birthDate}', creationDate='{user.creationDate}' where userID='{user.ID}'";
+            Chapter chapter = entity as Chapter;
+            return $"update chaptersTbl set storyID=N'{chapter.story.ID}', topic=N'{chapter.topic}', content=N'{chapter.content}', chapterNumber='{chapter.chapterNumber}', datePublished='{chapter.datePublished}' where chapterID='{chapter.ID}'";
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
@@ -55,6 +55,7 @@ namespace ViewModel
             chapter.topic = (string)reader["topic"];
             chapter.content = (string)reader["content"];
             chapter.chapterNumber = (int)reader["chapterNumber"];
+            chapter.datePublished = (string)reader["datePublished"];
 
             return chapter;
         }

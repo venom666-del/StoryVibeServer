@@ -18,5 +18,6 @@ namespace Model.ModelObjects
         public Status status { get; set; }
         public string imageLink { get; set; }
         public double price { get; set; }
+        public int views { get; set; }
     }
 }

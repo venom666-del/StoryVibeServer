@@ -12,5 +12,6 @@ namespace Model.ModelObjects
         public string topic { get; set; }
         public string content { get; set; }
         public int chapterNumber { get; set; }
+        public string datePublished { get; set; }
     }
 }
