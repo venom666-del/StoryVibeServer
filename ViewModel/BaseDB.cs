@@ -27,7 +27,7 @@ namespace ViewModel
         protected abstract string CreateDeleteSQL(BaseEntity entity);
         public BaseDB()
         {
-            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\StoryVibe\StoryVibeServer\ViewModel\StoryVibeDB.mdf;Integrated Security=True";
+            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\hp\Desktop\StoryVibe\ViewModel\StoryVibeDB.mdf;Integrated Security=True";
             connection = new SqlConnection(connectionString);
             command = new SqlCommand();
         }
